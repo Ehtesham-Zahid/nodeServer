@@ -10,8 +10,8 @@ app.get("/", (req, res) => {
   res.send("Hello from EC2!");
 });
 
-// Start the server and have it listen on port 7070.
+// Start the server and have it listen on port 9999.
 // Once the server is up and running, log a message to the console.
-app.listen(7070, () => {
-  console.log("Server running on port 7070");
+app.listen(9999, () => {
+  console.log("Server running on port 9999");
 });
