@@ -4,6 +4,18 @@ const express = require("express");
 // Create an instance of an Express application
 const app = express();
 
+// Middleware to log each incoming request for debugging purposes
+app.use((req, res, next) => {
+  const timestamp = new Date().toISOString();
+  console.log(`[${timestamp}] ${req.method} ${req.originalUrl}`);
+  next();
+});
+
+// Health check middleware – responds to GET /health with a 200 status and JSON payload
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 // Define a route handler for GET requests to the root path ("/")
 // When a client accesses the root URL, the server responds with a simple greeting message.
 app.get("/", (req, res) => {
