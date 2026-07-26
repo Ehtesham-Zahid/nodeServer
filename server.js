@@ -4,10 +4,17 @@ const express = require("express");
 // Create an instance of an Express application
 const app = express();
 
-// Middleware to log each incoming request with method, URL, and timestamp
+// Middleware to parse JSON bodies
+app.use(express.json());
+
+// Middleware to log each incoming request with method, URL, timestamp, headers, and body
 app.use((req, res, next) => {
   const timestamp = new Date().toISOString();
   console.log(`[${timestamp}] ${req.method} ${req.url}`);
+  console.log(`Headers: ${JSON.stringify(req.headers)}`);
+  if (Object.keys(req.body).length) {
+    console.log(`Body: ${JSON.stringify(req.body)}`);
+  }
   next();
 });
 
