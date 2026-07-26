@@ -4,9 +4,17 @@ const express = require("express");
 // Create an instance of an Express application
 const app = express();
 
+// Middleware to log incoming requests for debugging purposes
+app.use((req, res, next) => {
+  const now = new Date().toISOString();
+  console.log(`[${now}] ${req.method} ${req.originalUrl}`);
+  next();
+});
+
 // Define a route handler for GET requests to the root path ("/")
 // When a client accesses the root URL, the server responds with a simple greeting message.
 app.get("/", (req, res) => {
+  console.log("Handling GET request for /");
   res.send("Hello from EC2!");
 });
 
